@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/prisma-client" // Specify a custom output path
+}
+
+datasource db {
+  provider = "sqlite" // Change this to "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  fullName  String
+  phone     String
+  email     String   @unique
+  createdAt DateTime @default(now())
+}

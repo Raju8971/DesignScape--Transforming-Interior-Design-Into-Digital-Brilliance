@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Work</title>
+  <style>
+       * {
+      box-sizing: border-box;
+    }
+
+    
+    /* Same styles as you already have, shortened here for clarity */
+    .all-works1 {
+  font-size: 32px;
+  color: #502976;
+  margin: 50px auto 10px auto;
+  font-weight: bold;
+  text-align: center;
+  display: block;
+}
+
+    .all-works-child {
+      width: 90%;
+      height: 2px;
+      background-color: #502976;
+      margin: 10px auto;
+    }
+
+    .work-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+    }
+
+    .work-buttons div {
+      background-color: #f3f3f3;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 18px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 600;
+      color: #502976;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .work-buttons div:hover {
+      background-color: #502976;
+      color: white;
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 50px 65px;
+    }
+
+    .work-item {
+      width: 100%;
+      height: 300px;
+      background-color: rgba(0, 0, 0, 0.05);
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .work-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    #imagePopup {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.85);
+  justify-content: center;
+  align-items: center;
+}
+
+#imagePopup img {
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px #fff;
+}
+
+#imagePopup .closeBtn {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-size: 40px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  user-select: none;
+}
+
+ 
+<div id="imagePopup">
+  <span class="closeBtn" onclick="closePopup()">&times;</span>
+  <img id="popupImg" src="" alt="Popup Image">
+</div>
+ 
+  // Filtering
+  function filterImages(category) {
+    const items = document.querySelectorAll('.work-item');
+    items.forEach(item => {
+      const itemCategory = item.getAttribute('data-category');
+      if (category === 'all' || itemCategory === category) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  // Image Popup
+  const popup = document.getElementById("imagePopup");
+  const popupImg = document.getElementById("popupImg");
+
+  document.querySelectorAll('.work-item img').forEach(img => {
+    img.addEventListener('click', () => {
+      popup.style.display = "flex";
+      popupImg.src = img.src;
+    });
+  });
+
+  function closePopup() {
+    popup.style.display = "none";
+  }
+
+  // Close when clicking outside image
+  popup.addEventListener('click', (e) => {
+    if (e.target === popup) {
+      closePopup();
+    }
+  });
+</script>
+✅ What This Does:
+Hover: Zooms in images slightly on mouse hover.
+
+Animation: All images animate in with a subtle fade-in effect.
+
+Popup: Clicking any image opens it fullscreen in a modal with a close (×) button.
+
+Would you like to add image captions, next/previous arrows, or make this popup work as a slideshow/gallery?
+
+
+
+You said:
+all code can u give in 1 file
+
+ChatGPT said:
+Absolutely! Here's your complete HTML file with:
+
+Buttons to filter images (All, Houses, Offices, Landscapes, Residential)
+
+All images animated with hover zoom + fade-in effect
+
+A popup (lightbox) that shows full-size images when clicked
+
+✅ Full HTML Code (Copy & Paste into .html file)
+html
+Copy
+Edit
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Work</title>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+    }
+
+    /* Background Animation */
+    .background {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 20%, rgba(0, 0, 0, 0.1) 80%);
+      animation: backgroundAnimation 15s infinite linear;
+      z-index: -1;
+    }
+
+    @keyframes backgroundAnimation {
+      0% {
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 20%, rgba(0, 0, 0, 0.1) 80%);
+      }
+      50% {
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 20%, rgba(0, 0, 0, 0.2) 80%);
+      }
+      100% {
+        background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 20%, rgba(0, 0, 0, 0.1) 80%);
+      }
+    }
+    .all-works1 {
+      font-size: 32px;
+      color: #502976;
+      margin: 50px auto 10px auto;
+      font-weight: bold;
+      text-align: center;
+      display: block;
+    }
+
+    .all-works-child {
+      width: 90%;
+      height: 2px;
+      background-color: #502976;
+      margin: 10px auto;
+    }
+
+    .work-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .work-buttons div {
+      background-color: #f3f3f3;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 18px;
+      font-weight: 600;
+      color: #502976;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .work-buttons div:hover {
+      background-color: #502976;
+      color: white;
+    }
+
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      padding: 50px 65px;
+    }
+
+    .work-item {
+      position: relative;
+      overflow: hidden;
+      height: 300px;
+      border-radius: 10px;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      animation: fadeIn 0.6s ease-in-out;
+    }
+
+    .work-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .work-item:hover img {
+      transform: scale(1.1);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @media (max-width: 1024px) {
+      .works-grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 30px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .works-grid {
+        grid-template-columns: repeat(1, 1fr);
+        padding: 20px;
+      }
+    }
+
+    /* Popup styles */
+    #imagePopup {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+    }
+
+    #imagePopup img {
+      max-width: 90%;
+      max-height: 80%;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #fff;
+    }
+
+    #imagePopup .closeBtn {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      font-size: 40px;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    @media (max-width: 1024px) {
+      .works-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .works-grid {
+        grid-template-columns: repeat(1, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+    <!-- Header -->
+    <div id="header"></div>
+
+  <b class="all-works1">All Works</b>
+  <div class="all-works-child"></div>
+
+  <!-- Buttons -->
+  <div class="work-buttons">
+    <div onclick="filterImages('all')">All</div>
+    <div onclick="filterImages('houses')">Houses</div>
+    <div onclick="filterImages('offices')">Offices</div>
+    <div onclick="filterImages('landscapes')">Landscapes</div>
+    <div onclick="filterImages('residential')">Residential</div>
+  </div>
+
+  <a href='/connect'> 
+  <!-- Work Images -->
+  <div class="works-grid">
+    <!-- Example categories for demonstration -->
+    <div class="work-item" data-category="houses"><img src="https://media.designcafe.com/wp-content/uploads/2022/07/29185240/industrial-rustic-living-room-in-earthy-tones.jpg" alt="House 1"></div>
+    <div class="work-item" data-category="houses"><img src="https://media.designcafe.com/wp-content/uploads/2022/07/15170350/luxury-home-design-on-budget.jpg" alt="House 2"></div>
+    <div class="work-item" data-category="offices"><img src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/e9739945710967.583ab84d265f2.jpg" alt="Office 1"></div>
+    <div class="work-item" data-category="offices"><img src="https://images.pexels.com/photos/37347/office-sitting-room-executive-sitting.jpg?cs=srgb&dl=pexels-pixabay-37347.jpg&fm=jpg" alt="Office 2"></div>
+    <div class="work-item" data-category="landscapes"><img src="https://images.adsttc.com/media/images/5e6e/93e9/b357/653d/d300/0262/newsletter/24.jpg?1584305104" alt="Landscape 1"></div>
+    <div class="work-item" data-category="landscapes"><img src="https://romalandscapedesign.com/wp-content/uploads/2015/10/lobby-indoor-landscape-design.jpg" alt="Landscape 2"></div>
+    <div class="work-item" data-category="residential"><img src="https://img1.exportersindia.com/product_images/bc-full/2022/7/10388032/residential-interior-designer-1657796473-6445587.jpeg" alt="Residential 1"></div>
+    <div class="work-item" data-category="residential"><img src="https://www.dreaminteriors.in/wp-content/uploads/2020/05/residential-interior-01-1200x540.jpg" alt="Residential 2"></div>
+    <div class="work-item" data-category="houses"><img src="https://i.pinimg.com/736x/1d/2f/fc/1d2ffca38e49d55e8954f412f3518363.jpg" alt="Residential 2"></div>
+    <div class="work-item" data-category="houses"><img src="https://media.licdn.com/dms/image/v2/D5612AQGxJoxauX-v-w/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1697507291673?e=2147483647&v=beta&t=V1NlM7g-d4bHlH-7D55V_tXB44y-5z5qco_lE0Y0O5U" alt="Residential 2"></div>
+    <div class="work-item" data-category="houses"><img src="https://images.livspace-cdn.com/plain/https://jumanji.livspace-cdn.com/magazine/wp-content/uploads/sites/3/2021/10/18115838/modern-house-design.jpg" alt="Residential 2"></div>
+    <div class="work-item" data-category="houses"><img src="https://depanache.in/depanache-ui/uploads/2022/06/small-duplex-house-interior-ideas.webp" alt="Residential 2"></div>
+    <div class="work-item" data-category="offices"><img src="https://www.niveeta.in/images/products/Green-Office-design.webp" alt="Residential 2"></div>
+    <div class="work-item" data-category="offices"><img src="https://shilpkalastudio.com/wp-content/uploads/2023/09/ashok-behti-ji-corporate-office-10.webp" alt="Residential 2"></div>
+    <div class="work-item" data-category="offices"><img src="https://i.pinimg.com/736x/b5/fa/79/b5fa790d3f0e21b9d6e16097f6f21d02.jpg" alt="Residential 2"></div>
+    <div class="work-item" data-category="offices"><img src="https://officebanao.com/wp-content/uploads/2023/12/modern-interior-open-office-workspace.jpg" alt="Residential 2"></div>
+    <div class="work-item" data-category="offices"><img src="https://www.decorilla.com/online-decorating/wp-content/uploads/2020/01/Luxe-furniture-for-a-modern-office-design-style-by-Decorilla-designer-Beyzanur-K.-.jpeg" alt="Residential 2"></div>
+    <div class="work-item" data-category="landscapes"><img src="https://images.adsttc.com/media/images/5e6f/8dc5/b357/65c4/1200/06a3/newsletter/26.jpg?1584369080" alt="Residential 2"></div>
+    <div class="work-item" data-category="landscapes"><img src="https://www.bensley.com/wp-content/uploads/2023/08/JW_CJUJU_LOBBY-1-copy.jpg" alt="Residential 2"></div>
+    <div class="work-item" data-category="landscapes"><img src="https://design.museaward.com/upload/entry/thumb/1646825441_thumb_208327.jpeg" alt="Residential 2"></div>
+    <div class="work-item" data-category="landscapes"><img src="https://ansainteriors.com/wp-content/uploads/2020/08/latest-landscape-design-india.jpg" alt="Residential 2"></div>
+    <div class="work-item" data-category="landscapes"><img src="https://images.squarespace-cdn.com/content/v1/645a63203355ca0641e905d6/148b3ecf-431f-4ee1-ab0d-158eae1361e8/MODERN+FRONT+YARD.png" alt="Residential 2"></div>
+    <div class="work-item" data-category="residential"><img src="https://ddesigninterior.in/wp-content/uploads/2024/11/ffmiookg_wamidHBgMOTE5NTAzMjgyMzQ1FQIAEhggQTIxMTFGMEU3RTNBNTU0RDE5QzRBMTU2NkJFNjA1NUQA-scaled.jpeg" alt="Residential 2"></div>
+    <div class="work-item" data-category="residential"><img src="https://www.perfectinteriordesigns.com/images/residential-interior-decoration-in-bangalore/famous-home-interior-designers-in-bangalore.jpg" alt="Residential 2"></div>
+    <div class="work-item" data-category="residential"><img src="https://www.wagmadesigns.com/wp-content/uploads/2019/11/Dining.jpg" alt="Residential 2"></div>
+    <div class="work-item" data-category="residential"><img src="https://gbdmagazine.com/wp-content/uploads/2021/08/Kevin-Scott-miller-hull-loom-house-gbd-magazine-01.jpg" alt="Residential 2"></div>
+
+    <div class="work-item" data-category="houses"><img src="https://5.imimg.com/data5/SELLER/Default/2024/8/443346311/BH/DQ/AR/70677625/house-interior-design-500x500.jpg" alt="House 3"></div>
+    <!-- External Images also categorized -->
+    <div class="work-item" data-category="offices"><img src="https://images.homify.com/v1495001963/p/photo/image/2013905/CAM_2_OPTION_1.jpg"></div>
+    <div class="work-item" data-category="residential"><img src="https://assets.architecturaldigest.in/photos/62baf4a6a3b60aa6ef162d15/3:2/w_1620,h_1080,c_limit/A%20welcoming%20Mumbai%20apartment%20that%20brings%20warmth%20to%20Scandinavian%20design.jpg"></div>
+    <div class="work-item" data-category="houses"><img src="https://hips.hearstapps.com/hmg-prod/images/edc100121fernandez-008-1631204495.jpg?crop=1.00xw:0.617xh;0,0.294xh&resize=1200:" ></div>
+    <div class="work-item" data-category="landscapes"><img src="https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L2ZsMTk1MTAyNjQ5NDktaW1hZ2Uta3liZW1xZnMuanBn.jpg" ></div>
+    <div class="work-item" data-category="residential"><img src="https://media.designcafe.com/wp-content/uploads/2022/06/30173737/family-living-room-interiors-for-memorable-moments.jpg" ></div>
+    <div class="work-item" data-category="offices"><img src="https://interiosplash.com/wp-content/uploads/2024/09/12-optimized.webp" ></div>
+    <div class="work-item" data-category="houses"><img src="https://skylinespaces.com/wp-content/uploads/2024/04/1347182-1-scaled.jpg" ></div>
+    <div class="work-item" data-category="landscapes"><img src="https://media.istockphoto.com/id/1365110240/photo/orange-boho-style-interior-with-armchair-dresser-and-decor-3d-render-illustration-mockup.jpg?s=612x612&w=0&k=20&c=7qiXW8ZPe8WIYFf4nBZXI34Ntd3XQP1B6zBmw5yeL3s=" ></div>
+    <div class="work-item" data-category="residential"><img src="https://alacritys.in/wp-content/uploads/2024/12/63.-Heritage-Chic-Interior-Design-for-Home.jpg" ></div>
+  </div>
+  </a>
+  <div id="imagePopup">
+    <span class="closeBtn" onclick="closePopup()">&times;</span>
+    
+  <script>
+    function filterImages(category) {
+      const items = document.querySelectorAll('.work-item');
+      items.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        if (category === 'all' || itemCategory === category) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    }
+  </script>
+  <div id="footer"></div>
+    <script src="Server_HF.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Let's Connect</title>
+  <style>
+    :root {
+      --primary: #6a1b9a;
+      --light-bg: #f9f6fc;
+      --white: #ffffff;
+      --text-dark: #333;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+    }
+
+    .connect-container {
+      display: flex;
+      flex-direction: row; /* ✅ Ensure left-to-right layout */
+      flex-wrap: wrap;
+      min-height: 100vh;
+    }
+
+    .image-container {
+      flex: 1;
+      background: url('https://5.imimg.com/data5/SELLER/Default/2023/9/342975827/TA/NB/QU/192275243/master-bedroom-decor.jpeg') no-repeat center center/cover;
+      min-height: 500px;
+      margin-bottom:50px;
+    }
+
+    .form-container {
+      flex: 1;
+      background: var(--light-bg);
+      padding: 60px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    h2 {
+      color: var(--primary);
+      font-size: 28px;
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-weight: 600;
+      margin: 10px 0 6px;
+      display: block;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: none;
+      border-bottom: 2px solid #aaa;
+      background: transparent;
+      margin-bottom: 20px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+    }
+
+    .submit-btn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 18px;
+      padding: 12px 20px;
+      border: 2px solid var(--primary);
+      background: transparent;
+      color: var(--primary);
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      text-decoration: none;
+      width: fit-content;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    .submit-btn span {
+      font-size: 22px;
+    }
+
+    #thankYouMessage {
+      display: none;
+      text-align: center;
+      color: var(--primary);
+      font-weight: bold;
+      font-size: 22px;
+      margin-top: 50px;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 768px) {
+      .connect-container {
+        flex-direction: column;
+      }
+
+      .form-container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+   <!-- Header -->
+    <div id="header"></div>
+  <div class="connect-container">
+    <!-- ✅ Left Side Image -->
+    <div class="image-container"></div>
+
+    <!-- ✅ Right Side Form -->
+    <div class="form-container">
+      <form id="contactForm">
+        <h2>Contact Us</h2>
+
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" name="fullName" required />
+
+        <label for="phone">Phone</label>
+        <input type="text" id="phone" name="phone" required />
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <button class="submit-btn" type="submit">
+          <span>➜</span> Submit
+        </button>
+      </form>
+
+      <p id="thankYouMessage">Thank You<br>We’ll Get In Touch Shortly</p>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const fullName = document.getElementById('fullName').value;
+      const phone = document.getElementById('phone').value;
+      const email = document.getElementById('email').value;
+
+      try {
+        const response = await fetch('/connect', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ fullName, phone, email })
+        });
+
+        const result = await response.text();
+
+        if (response.ok) {
+          form.style.display = "none";
+          document.getElementById('thankYouMessage').style.display = 'block';
+        } else {
+          alert("❌ " + result);
+        }
+      } catch (error) {
+        console.error("❌ Error:", error);
+        alert("Something went wrong. Please try again.");
+      }
+    });
+  </script>
+  <!-- Footer -->
+    <div id="footer"></div>
+    <script src="Server_HF.js"></script>
+</body>
+</html>
